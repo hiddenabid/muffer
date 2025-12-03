@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        .success { color: green; font-weight: bold; }
+        .form-group { margin-bottom: 15px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;}
+        button { background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Welcome to Scheduler</h2>
+    
+    {% if msg %}
+        <p class="success">{{ msg }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <h3>1. Select Pages</h3>
+        {% for page in pages %}
+        <div class="form-group">
+            <input type="checkbox" name="pages" value="{{ page.page_id }}">
+            <label>{{ page.page_name }}</label>
+        </div>
+        {% endfor %}
+
+        <h3>2. Upload CSV</h3>
+        <p>Columns: <code>message, image_url, scheduled_time</code></p>
+        <p>Time Format: <code>YYYY-MM-DD HH:MM:SS</code></p>
+        <input type="file" name="csv_file" required accept=".csv">
+        <br><br>
+        <button type="submit">Schedule Posts</button>
+    </form>
+</body>
+</html>
